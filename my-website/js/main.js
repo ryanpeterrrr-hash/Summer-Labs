@@ -173,10 +173,14 @@ if (contactForm) {
     errorMsg.style.display = 'none';
 
     try {
+      const data = Object.fromEntries(new FormData(contactForm));
       const res = await fetch(contactForm.action, {
         method: 'POST',
-        body: new FormData(contactForm),
-        headers: { Accept: 'application/json' },
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
       });
       if (res.ok) {
         successMsg.style.display = 'block';
