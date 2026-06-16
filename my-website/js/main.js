@@ -156,56 +156,41 @@ if (shuffleGrid) {
 }
 
 /* =========================================
-   Footer - animated wave bars
-   Builds a row of bars and animates them
-   with a sine wave while in view.
+   Contact form — Formspree AJAX submission
 ========================================= */
-const waveContainer = document.getElementById('wave-container');
+const contactForm = document.querySelector('.contact-form');
 
-if (waveContainer) {
-  const barCount = 23;
-  const bars = [];
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('.form-submit');
+    const successMsg = contactForm.querySelector('.form-success-msg');
+    const errorMsg = contactForm.querySelector('.form-error-msg');
 
-  /* Same purple/lavender used at the top of the CTA section above the footer */
-  const waveBarColor = '#d6bef0';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
 
-  for (let i = 0; i < barCount; i += 1) {
-    const bar = document.createElement('div');
-    bar.className = 'wave-bar';
-    bar.style.height = `${i + 1}px`;
-    bar.style.background = waveBarColor;
-    waveContainer.appendChild(bar);
-    bars.push(bar);
-  }
-
-  let waveTime = 0;
-  let waveFrame = null;
-
-  function animateWave() {
-    let offset = 0;
-    bars.forEach((bar, index) => {
-      offset += Math.max(0, 20 * Math.sin((waveTime + index) * 0.3));
-      bar.style.transform = `translateY(${(index + offset).toFixed(2)}px)`;
-    });
-    waveTime += 0.1;
-    waveFrame = requestAnimationFrame(animateWave);
-  }
-
-  const waveObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && waveFrame === null) {
-          animateWave();
-        } else if (!entry.isIntersecting && waveFrame !== null) {
-          cancelAnimationFrame(waveFrame);
-          waveFrame = null;
-        }
+    try {
+      const res = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { Accept: 'application/json' },
       });
-    },
-    { threshold: 0.1 }
-  );
+      if (res.ok) {
+        successMsg.style.display = 'block';
+        contactForm.reset();
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    } catch {
+      errorMsg.style.display = 'block';
+    }
 
-  waveObserver.observe(waveContainer);
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message';
+  });
 }
 
 /* =========================================
