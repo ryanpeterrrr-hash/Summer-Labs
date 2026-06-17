@@ -155,47 +155,7 @@ if (shuffleGrid) {
   shuffleObserver.observe(shuffleGrid);
 }
 
-/* =========================================
-   Contact form — Formspree AJAX submission
-========================================= */
-const contactForm = document.querySelector('.contact-form');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const submitBtn = contactForm.querySelector('.form-submit');
-    const successMsg = contactForm.querySelector('.form-success-msg');
-    const errorMsg = contactForm.querySelector('.form-error-msg');
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending…';
-    successMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
-
-    try {
-      const data = Object.fromEntries(new FormData(contactForm));
-      const res = await fetch(contactForm.action, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
-      if (res.ok) {
-        successMsg.style.display = 'block';
-        contactForm.reset();
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    } catch {
-      errorMsg.style.display = 'block';
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Send Message';
-  });
-}
+/* Contact form submits natively to Formsubmit.co — no JS interception needed */
 
 /* =========================================
    Footer - back to top
