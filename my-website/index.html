@@ -319,7 +319,49 @@
     <div class="container cta-inner reveal">
       <h2>Ready to Put Your Business on Autopilot?</h2>
       <p>Join hundreds of businesses already using SummerLabs.</p>
-      <a href="mailto:contact@summerlabs.io" class="btn btn-fey">Book a Free Demo</a>
+      <a href="#demo-form" class="btn btn-fey">Book a Free Demo</a>
+    </div>
+
+    <!-- ============ CONTACT FORM ============ -->
+    <div class="container contact-form-section reveal" id="demo-form">
+      <p class="contact-form-heading">Book a Demo — Tell Us About Your Business</p>
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="full-name">Full Name</label>
+            <input type="text" id="full-name" name="full_name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+61 400 000 000" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="service">Service Required</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select a service…</option>
+            <option>Voice Agent</option>
+            <option>AI Phone Answering</option>
+            <option>AI Text Messaging</option>
+            <option>Voice to Quote</option>
+            <option>Quoting</option>
+            <option>Invoicing</option>
+            <option>AI Email Responder</option>
+            <option>AI Chatbot</option>
+            <option>AI Agents</option>
+            <option>CRM</option>
+            <option>Job Manager</option>
+            <option>Smart Scheduling</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Details</label>
+          <textarea id="message" name="message" rows="5" placeholder="Tell us about your business and what you're looking to achieve…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-fey form-submit" id="form-submit-btn">Send Message</button>
+        <p class="form-success-msg" id="form-success">Thanks! We'll be in touch shortly.</p>
+        <p class="form-error-msg" id="form-error">Oops — something went wrong. Please try again or email us at contact@summerlabs.io</p>
+      </form>
     </div>
   </section>
 
