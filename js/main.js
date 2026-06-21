@@ -163,7 +163,7 @@ function initContactForm() {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    fetch('https://formsubmit.co/ajax/el/rumeta', {
+    fetch('https://formsubmit.co/ajax/contact@summerlabs.io', {
       method: 'POST',
       headers: { Accept: 'application/json' },
       body: new FormData(form),
