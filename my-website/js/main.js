@@ -156,42 +156,6 @@ if (shuffleGrid) {
 }
 
 /* =========================================
-   Contact form — AJAX submit (no page redirect)
-========================================= */
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('form-submit-btn');
-    const success = document.getElementById('form-success');
-    const error = document.getElementById('form-error');
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-    success.style.display = 'none';
-    error.style.display = 'none';
-    try {
-      const data = new FormData(contactForm);
-      const res = await fetch('https://formsubmit.co/ajax/contact@summerlabs.io', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
-      });
-      if (res.ok) {
-        success.style.display = 'block';
-        contactForm.reset();
-      } else {
-        error.style.display = 'block';
-      }
-    } catch {
-      error.style.display = 'block';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Send Message';
-    }
-  });
-}
-
-/* =========================================
    Footer - back to top
 ========================================= */
 const backToTop = document.getElementById('back-to-top');

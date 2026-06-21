@@ -325,7 +325,10 @@
     <!-- ============ CONTACT FORM ============ -->
     <div class="container contact-form-section reveal" id="demo-form">
       <p class="contact-form-heading">Book a Demo — Tell Us About Your Business</p>
-      <form class="contact-form" id="contact-form">
+      <form class="contact-form" id="contact-form" action="https://formsubmit.co/contact@summerlabs.io" method="POST">
+        <input type="hidden" name="_subject" value="New Demo Request — SummerLabs">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://summerlabs-production.up.railway.app">
         <div class="form-row">
           <div class="form-group">
             <label for="full-name">Full Name</label>
