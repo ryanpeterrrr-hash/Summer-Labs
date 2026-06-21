@@ -788,6 +788,29 @@ section {
   right: 5%;
 }
 
+.cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-inner .btn + .btn {
+  margin-top: 0;
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
 .cta-inner h2 {
   font-size: clamp(2rem, 4.5vw, 3rem);
   font-weight: 800;
