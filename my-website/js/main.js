@@ -155,8 +155,6 @@ if (shuffleGrid) {
   shuffleObserver.observe(shuffleGrid);
 }
 
-/* Contact form submits natively to Formsubmit.co — no JS interception needed */
-
 /* =========================================
    Footer - back to top
 ========================================= */
