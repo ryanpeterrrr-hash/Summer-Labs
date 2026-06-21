@@ -4,14 +4,12 @@
    scroll-triggered animations, and stat counters.
    ========================================================= */
 
-document.addEventListener('DOMContentLoaded', () => {
-  initLogoFallback();
-  initNavbar();
-  initMobileMenu();
-  initScrollAnimations();
-  initHeroParallax();
-  initContactForm();
-});
+initLogoFallback();
+initNavbar();
+initMobileMenu();
+initScrollAnimations();
+initHeroParallax();
+initContactForm();
 
 /* -----------------------------------------------------------
    Logo fallback
