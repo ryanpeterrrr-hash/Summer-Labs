@@ -154,11 +154,34 @@ function initContactForm() {
   const success = document.getElementById('form-success');
   if (!form || !success) return;
 
-  if (new URLSearchParams(window.location.search).get('submitted') === '1') {
-    form.hidden = true;
-    success.hidden = false;
-    window.history.replaceState(null, '', window.location.pathname + '#contact');
-  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (data.success) {
+          form.hidden = true;
+          success.hidden = false;
+        } else {
+          throw new Error(data.message);
+        }
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = original;
+        alert('Something went wrong — please email us at contact@summerlabs.io');
+      });
+  });
 }
 
 /* -----------------------------------------------------------
