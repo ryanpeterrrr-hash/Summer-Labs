@@ -158,17 +158,28 @@ if (shuffleGrid) {
 /* =========================================
    Contact form — Web3Forms AJAX (stays on page)
 ========================================= */
+function showToast(msg, isError = false) {
+  let toast = document.getElementById('toast-popup');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-popup';
+    toast.className = 'toast-popup';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.background = isError ? '#ef4444' : '#22c55e';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const scrollY = window.scrollY;
     const btn = document.getElementById('form-submit-btn');
-    const success = document.getElementById('form-success');
-    const error = document.getElementById('form-error');
     btn.disabled = true;
     btn.textContent = 'Sending…';
-    success.style.display = 'none';
-    error.style.display = 'none';
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -177,16 +188,17 @@ if (contactForm) {
       });
       const json = await res.json();
       if (json.success) {
-        success.style.display = 'block';
+        showToast('Submitted ✓');
         contactForm.reset();
       } else {
-        error.style.display = 'block';
+        showToast('Something went wrong. Please try again.', true);
       }
     } catch {
-      error.style.display = 'block';
+      showToast('Something went wrong. Please try again.', true);
     } finally {
       btn.disabled = false;
       btn.textContent = 'Send Message';
+      window.scrollTo({ top: scrollY, behavior: 'instant' });
     }
   });
 }
